@@ -9,10 +9,15 @@ describe "StaticPages" do
                         :text => 'Bienvenue sur BiomeTTico!')
     end
     
-    it "should have the right title" do
+    it "should have the base title" do
        visit '/static_pages/accueil'
        page.should have_selector('title',
-                        :text => "Biomettico | Accueil")
+                        :text => "Biomettico")
+     end
+     
+     it "should not have a custom page title (accueil)" do
+       visit '/static_pages/accueil'
+       page.should_not have_selector('title',:text => '| Accueil')
      end
   end
   
@@ -23,10 +28,9 @@ describe "StaticPages" do
       page.should have_selector('h1',:text => 'Aide')
     end
     
-    it "should have the right title" do
+    it "should not have a custom page title (aide)" do
        visit '/static_pages/aide'
-       page.should have_selector('title',
-                         :text => "Biomettico | Aide")
+       page.should_not have_selector('title',:text => '| Aide')
      end
   end
     describe "page Contact" do
@@ -36,10 +40,9 @@ describe "StaticPages" do
         page.should have_selector('h1',:text => 'Contact')
       end
       
-      it "should have the right title" do
+      it "should not have a custom page title (contact)" do
          visit '/static_pages/contact'
-         page.should have_selector('title',
-                           :text => "Biomettico | Contact")
+         page.should_not have_selector('title',:text => '| Contact')
        end
     end
   end
